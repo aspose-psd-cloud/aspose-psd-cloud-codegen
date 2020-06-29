@@ -1,0 +1,21 @@
+{{>licenseInfo}}
+
+package {{package}};
+
+{{^supportJava6}}
+import java.util.Objects;
+{{/supportJava6}}
+{{#supportJava6}}
+import org.apache.commons.lang3.ObjectUtils;
+{{/supportJava6}}
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.aspose.psd.cloud.sdk.stablemodel.*;
+
+{{#models}}
+{{#model}}
+{{#isEnum}}{{>modelEnum}}{{/isEnum}}{{^isEnum}}{{>pojo}}{{/isEnum}}
+{{/model}}
+{{/models}}
