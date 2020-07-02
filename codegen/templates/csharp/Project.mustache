@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net2;net3.5;net4;net45;netstandard2.0</TargetFrameworks>
+    <AssemblyVersion>19.3.0.0</AssemblyVersion>
+    <FileVersion>19.3.0.0</FileVersion>
+    <Version>19.3.0</Version>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageId>Aspose.Psd-Cloud</PackageId>
+    <PackageVersion>20.6.0</PackageVersion>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageTags>aspose psd cloud rest api sdk image</PackageTags>
+    <PackageLicenseUrl>https://github.com/aspose-psd-cloud/aspose-psd-cloud-dotnet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/aspose-psd-cloud/aspose-psd-cloud-dotnet</PackageProjectUrl>
+    <PackageIconUrl>https://www.aspose.cloud/templates/aspose/App_Themes/V3/images/imaging/272x272/aspose_imaging-for-net-min.png</PackageIconUrl>
+    <PackageReleaseNotes>Improvements.</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/aspose-psd-cloud/aspose-psd-cloud-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Title>Aspose.PSD Cloud .NET SDK</Title>
+    <Company>Aspose</Company>
+    <Authors>Aspose</Authors>
+    <ProductName>Aspose.PSD Cloud .NET SDK</ProductName>
+    <ProductVersion>20.6</ProductVersion>
+    <Description>TODO <\Description>
+    <Copyright>Copyright © 2002-2020 Aspose Pty Ltd. All Rights Reserved.</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <IncludeSymbols>true</IncludeSymbols>
+  </PropertyGroup>  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net2|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+     <PackageReference Include="System.Net.Requests" Version="4.3.0" />
+  </ItemGroup>
+</Project>

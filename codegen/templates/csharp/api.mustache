@@ -1,0 +1,202 @@
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Aspose" file="{{classname}}.cs">
+//   Copyright (c) 2018-2020 Aspose Pty Ltd. All rights reserved.
+// </copyright>
+// <summary>
+//   Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+// 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace {{packageName}}.Api
+{
+    using System.Collections.Generic;
+    using System.Text.RegularExpressions;
+    using {{packageName}}.Client;
+    using {{packageName}}.Client.Internal;
+    using {{packageName}}.Client.Internal.RequestHandlers;
+    using {{packageName}}.Model;
+    using {{packageName}}.Model.Requests;
+    
+    /// <summary>
+    /// Aspose.Psd Cloud API.
+    /// </summary>
+    public class {{classname}}
+    {                 
+        #region Fields
+
+        /// <summary>
+        /// The configuration
+        /// </summary>
+        public readonly Configuration Configuration;
+        
+        /// <summary>
+        /// The API invoker
+        /// </summary>
+        private readonly ApiInvoker apiInvoker;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="{{classname}}"/> class for Aspose Cloud-hosted solution usage.
+        /// </summary>
+        /// <param name="appKey">
+        /// The app key.
+        /// </param>
+        /// <param name="appSid">
+        /// The app SID.
+        /// </param>
+        /// <param name="baseUrl">
+        /// The base URL. Use <see cref="Configuration.DefaultBaseUrl"/> to set the default base URL.
+        /// </param>
+        /// <param name="apiVersion">
+        /// The API version.
+        /// </param>
+        /// <param name="debug">
+        /// If debug mode is enabled.
+        /// </param>
+        public {{classname}}(string appKey, string appSid, string baseUrl = Configuration.DefaultBaseUrl, 
+            string apiVersion = Configuration.DefaultApiVersion, bool debug = false)
+            : this(new Configuration
+            {
+                AppKey = appKey,
+                AppSid = appSid,
+                ApiBaseUrl = baseUrl,
+                ApiVersion = apiVersion,
+                DebugMode = debug,
+                OnPremise = false
+            })
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="{{classname}}"/> class for on-premise solution with metered license usage.
+        /// </summary>
+        /// <param name="baseUrl">
+        /// The base URL of your server.
+        /// </param>
+        /// <param name="apiVersion">
+        /// The API version.
+        /// </param>
+        /// <param name="debug">
+        /// If debug mode is enabled.
+        /// </param>
+        public {{classname}}(string baseUrl, string apiVersion = Configuration.DefaultApiVersion, bool debug = false)
+            : this(new Configuration
+            {
+                ApiBaseUrl = baseUrl,
+                ApiVersion = apiVersion,
+                DebugMode = debug,
+                OnPremise = true
+            })
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="{{classname}}"/> class.
+        /// </summary>    
+        /// <param name="configuration">Configuration settings</param>
+        private {{classname}}(Configuration configuration)
+        {
+            this.Configuration = configuration;
+            var requestHandlers = new List<IRequestHandler>();
+            if (!configuration.OnPremise)
+            {
+                requestHandlers.Add(new AuthRequestHandler(this.Configuration));
+            }
+            
+            requestHandlers.Add(new DebugLogRequestHandler(this.Configuration));
+            requestHandlers.Add(new ApiExceptionRequestHandler());
+            this.apiInvoker = new ApiInvoker(requestHandlers, this.Configuration);
+        }
+
+        #endregion
+    
+        #region Methods
+        
+        {{#operations}}
+        {{#operation}}
+        /// <summary>
+        /// {{summary}} {{notes}}
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="{{vendorExtensions.x-operationId}}Request" /></param>{{#returnType}}
+        /// <returns><see cref="{{returnType}}"/></returns>{{/returnType}}            
+        public {{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}void{{/returnType}} {{vendorExtensions.x-operationId}}({{vendorExtensions.x-operationId}}Request request)
+        {
+{{#allParams}}{{#required}}            // verify the required parameter '{{paramName}}' is set
+            if (request.{{baseName}} == null) 
+            {
+                throw new ApiException(400, "Missing required parameter '{{paramName}}' when calling {{nickname}}");
+            }
+
+{{/required}}{{/allParams}}            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "{{path}}";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            {{#headerParams}}
+            {{#-first}}var headerParams = new Dictionary<string, string>();{{/-first}}
+            {{/headerParams}}
+            var formParams = new Dictionary<string, object>();
+            {{#pathParams}}
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "{{paramName}}", request.{{baseName}});
+            {{/pathParams}}
+            {{#queryParams}}
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "{{paramName}}", request.{{baseName}});
+            {{/queryParams}}
+            {{#headerParams}}
+            if ({{paramName}} != null) 
+            {
+                headerParams.Add("{{paramName}}", this.apiInvoker.ToPathValue(request.{{baseName}})); // header parameter
+            }
+            {{/headerParams}}
+            {{#hasBodyParam}}var postBody = SerializationHelper.Serialize(request.{{bodyParam.baseName}});{{/hasBodyParam}}
+            {{#formParams}}
+            if (request.{{baseName}} != null) 
+            {
+                {{#isFile}}formParams.Add("{{paramName}}", this.apiInvoker.ToFileInfo(request.{{baseName}}, "{{baseName}}"));{{/isFile}}{{^isFile}}formParams.Add("{{baseName}}", request.{{baseName}});{{/isFile}}
+            }
+            {{/formParams}}
+            {{#vendorExtensions}}
+            {{#returnType}}var response = {{/returnType}}this.apiInvoker.InvokeApi(
+                resourcePath, 
+                "{{httpMethod}}", 
+                {{#hasBodyParam}}postBody{{/hasBodyParam}}{{^hasBodyParam}}null{{/hasBodyParam}}, 
+                {{#hasHeaderParams}}headerParams{{/hasHeaderParams}}{{^hasHeaderParams}}null{{/hasHeaderParams}}, 
+                formParams);
+            {{#returnType}}
+            {{#x-binary-result}}return response;{{/x-binary-result}}
+            {{^x-binary-result}}if (response == null)
+            {
+                return null;
+            }
+      
+            return ({{returnType}})SerializationHelper.Deserialize<{{returnType}}>(StreamHelper.ToString(response));{{/x-binary-result}}
+            {{/returnType}}
+            {{/vendorExtensions}}
+        }
+        
+        {{/operation}}   
+        {{/operations}}     
+        #endregion
+    }
+}
+{{>requestModel}}
