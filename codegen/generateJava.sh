@@ -11,7 +11,7 @@ else
 fi
 
 apiendpoint=$2
-if [ "$2" != "" ]; then
+if [ "$2" == "" ]; then
   apiendpoint=https://api-qa.aspose.cloud/
 fi
 echo "API endpoint: " $apiendpoint

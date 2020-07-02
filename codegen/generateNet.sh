@@ -11,7 +11,7 @@ else
 fi
 
 apiendpoint=$2
-if [ "$2" != "" ]; then
+if [ "$2" == "" ]; then
   apiendpoint=https://api-qa.aspose.cloud/
 fi
 echo "API endpoint: " $apiendpoint
@@ -19,7 +19,9 @@ echo "API endpoint: " $apiendpoint
 cp -v templates/csharp/.swagger-codegen-ignore $sdkfolder/
 rm -rfv $sdkfolder/src/Aspose.Imaging.Cloud.Sdk/Api
 rm -rfv $sdkfolder/src/Aspose.Imaging.Cloud.Sdk/Model
-mv $sdkfolder/README.md  $sdkfolder/README.md.bak
+if [ -f $sdkfolder/README.md ]
+  then mv $sdkfolder/README.md $sdkfolder/README.md.bak
+fi
 rm -rfv $sdkfolder/docs
 java -jar tools/swagger-codegen-cli-2.4.5.jar generate -i $apiendpoint/v1.0/psd/swagger/sdkspec -l csharp -t templates/csharp -o $sdkfolder -c config.net.json
 mv $sdkfolder/README.md $sdkfolder/docs/API_README.md
