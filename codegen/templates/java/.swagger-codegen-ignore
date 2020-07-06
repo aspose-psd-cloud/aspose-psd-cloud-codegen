@@ -25,7 +25,6 @@
 src/main/java/com/aspose/psd/cloud/sdk/model/PsdResponse.java
 src/main/java/com/aspose/psd/cloud/sdk/invoker/*.java
 src/main/java/com/aspose/psd/cloud/sdk/invoker/**/*.java
-src/main/java/com/aspose/psd/cloud/sdk/stablemodel/*.java
 
 # skip tests
 src/test/java/com/aspose/psd/cloud/**/*.java
