@@ -1,0 +1,15 @@
+{
+  "invokerPackage":"com.aspose.psd.cloud.sdk.invoker",
+  "apiPackage":"com.aspose.psd.cloud.sdk.api",
+  "modelPackage":"com.aspose.psd.cloud.sdk.model",
+  "testPackage":"com.aspose.psd.cloud.test.api",
+  "groupId":"com.aspose",
+  "artifactId":"aspose-psd-cloud",
+  "artifactVersion":"20.6",
+  "artifactDescription":"Aspose.Psd Cloud SDK",
+  "artifactUrl":"https://github.com/aspose-psd-cloud/aspose-psd-cloud-java",
+  "developerOrganization":"Aspose Pty Ltd.",
+  "developerOrganizationUrl":"https://www.aspose.cloud/",
+  "licenseName":"MIT License",
+  "licenseUrl":"https://github.com/aspose-psd-cloud/aspose-psd-cloud-java/blob/master/LICENSE"
+}

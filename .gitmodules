@@ -1,0 +1,6 @@
+[submodule "SDKs/NET"]
+	path = SDKs/NET
+	url = https://github.com/aspose-psd-cloud/aspose-psd-cloud-dotnet.git
+[submodule "SDKs/Java"]
+	path = SDKs/Java
+	url = https://github.com/aspose-psd-cloud/aspose-psd-cloud-java.git
