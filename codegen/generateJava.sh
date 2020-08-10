@@ -23,7 +23,7 @@ if [ -f $sdkfolder/README.md ]
   then mv $sdkfolder/README.md $sdkfolder/README.md.bak
 fi
 rm -rf $sdkfolder/docs
-java -jar tools/swagger-codegen-cli-2.4.5.jar generate -i $apiendpoint/v1.0/psd/swagger/sdkspec -l java --import-mappings JfifData=JfifData -DsupportJava6=true -DdateLibrary=legacy -t templates/java -o $sdkfolder -c config.java.json
+java -jar tools/swagger-codegen-cli-2.4.5.jar generate -i $apiendpoint/v3.0/psd/swagger/sdkspec -l java --import-mappings JfifData=JfifData -DsupportJava6=true -DdateLibrary=legacy -t templates/java -o $sdkfolder -c config.java.json
 mv $sdkfolder/README.md $sdkfolder/docs/API_README.md
 mv $sdkfolder/README.md.bak $sdkfolder/README.md
 mono tools/RequestModelExtractor.exe $sdkfolder/src/main/java/com/aspose/psd/cloud/sdk/api $sdkfolder/src/main/java/com/aspose/psd/cloud/sdk/model/requests/ java

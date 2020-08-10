@@ -23,7 +23,7 @@ if [ -f $sdkfolder/README.md ]
   then mv $sdkfolder/README.md $sdkfolder/README.md.bak
 fi
 rm -rfv $sdkfolder/docs
-java -jar tools/swagger-codegen-cli-2.4.5.jar generate -i $apiendpoint/v1.0/psd/swagger/sdkspec -l csharp -t templates/csharp -o $sdkfolder -c config.net.json
+java -jar tools/swagger-codegen-cli-2.4.5.jar generate -i $apiendpoint/v3.0/psd/swagger/sdkspec -l csharp -t templates/csharp -o $sdkfolder -c config.net.json
 mv $sdkfolder/README.md $sdkfolder/docs/API_README.md
 mv $sdkfolder/README.md.bak $sdkfolder/README.md
 mono tools/RequestModelExtractor.exe $sdkfolder/src/Aspose.Psd.Cloud.Sdk/Api/ $sdkfolder/src/Aspose.Psd.Cloud.Sdk/Model/Requests/ csharp
